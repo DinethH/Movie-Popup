@@ -1,5 +1,7 @@
 # Movie-Popup
 
+DEMO: http://dsh-s1.info/DigitalPoint/netflix-popup/
+
 get-movie-info.php
 -------------------
 1. Takes 1 parameter [movieID: int].
