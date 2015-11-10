@@ -6,9 +6,10 @@
 <polymer-element name="netflix-popup" center layout attributes="fetchMoreInfo movieID">
     <template>
         <style>
-            paper-shadow {
+            .more-info-card {
                 border-radius: 8px;
                 width: 400px;
+                height: 400px;
                 background: white;
             }
             
@@ -23,6 +24,7 @@
             .body,
             .footer {
                 padding: 10px;
+                z-index: 10000;
             }
             
             h1 {
@@ -43,7 +45,7 @@
             
             .desc {
                 padding-bottom: 20px;
-                min-height: 200px;
+                //min-height: 200px;
             }
             
             .more-info-left {
@@ -86,7 +88,7 @@
         </style>
         <div horizontal layout hidden?="{{loading}}">
             <div>
-                <paper-shadow>
+                <paper-shadow class="more-info-card">
                     <template repeat="{{moreInfo in moreInfos}}">
                         <div class="heading">
                             <h1>{{moreInfo.Title}}<span class="year">({{moreInfo.Year}})</span></h1>

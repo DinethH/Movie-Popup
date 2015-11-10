@@ -6,7 +6,7 @@
 <polymer-element name="movie-card" attributes="movieID">
     <template>
         <style>
-            paper-shadow {
+            .movie-card {
                 height: 200px;
                 width: 150px;
                 background: green;
@@ -23,7 +23,7 @@
         <div horizontal layout end-justified>
             <div>
                 <a href="" target="_blank">
-                    <paper-shadow on-mouseover="{{showInfo}}" on-mouseout="{{hideInfo}}">
+                    <paper-shadow class="movie-card" on-mouseover="{{showInfo}}" on-mouseout="{{hideInfo}}">
 
                     </paper-shadow>
                 </a>
