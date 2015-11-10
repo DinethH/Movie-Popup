@@ -1,0 +1,53 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
+<link rel="import" href="bower_components/font-roboto/roboto.html">
+<link rel="import" href="netflix-popup.html">
+
+<polymer-element name="movie-card" attributes="movieID">
+    <template>
+        <style>
+            paper-shadow {
+                height: 200px;
+                width: 150px;
+                background: green;
+                margin: 5px;
+            }
+            
+            netflix-popup {
+                position: absolute;
+                margin-top: -230px;
+                margin-left: -430px;
+                z-index: 1000;
+            }
+        </style>
+        <div horizontal layout end-justified>
+            <div>
+                <a href="" target="_blank">
+                    <paper-shadow on-mouseover="{{showInfo}}" on-mouseout="{{hideInfo}}">
+
+                    </paper-shadow>
+                </a>
+                <netflix-popup id="moviePopup" hidden?="{{!hover}}" movieID="{{movieID}}"></netflix-popup>
+            </div>
+            <div></div>
+        </div>
+
+
+
+
+    </template>
+
+    <script>
+        Polymer({
+            hover: false,
+            showInfo: function () {
+                this.$.moviePopup.fetchMoreInfo();
+                this.hover = true;
+            },
+            hideInfo: function () {
+                this.hover = false;
+            }
+        });
+    </script>
+
+</polymer-element>

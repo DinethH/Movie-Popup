@@ -1,0 +1,142 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/paper-shadow/paper-shadow.html">
+<link rel="import" href="bower_components/font-roboto/roboto.html">
+<link rel="import" href="bower_components/core-ajax/core-ajax.html">
+
+<polymer-element name="netflix-popup" center layout attributes="fetchMoreInfo movieID">
+    <template>
+        <style>
+            paper-shadow {
+                border-radius: 8px;
+                width: 400px;
+                background: white;
+            }
+            
+            .heading {
+                background: #dd1010;
+                color: white;
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px;
+            }
+            
+            .heading,
+            .body,
+            .footer {
+                padding: 10px;
+            }
+            
+            h1 {
+                padding: 0;
+                margin: 0;
+                font-size: 16px;
+            }
+            
+            .year {
+                padding-left: 5px;
+                font-size: 12px;
+            }
+            
+            hr {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+            
+            .desc {
+                padding-bottom: 20px;
+                min-height: 200px;
+            }
+            
+            .more-info-left {
+                font-weight: bold;
+                width: 70px;
+                text-align: right;
+                margin-left: -10px;
+                padding-right: 10px;
+            }
+            
+            .arrow {
+                width: 100px;
+                height: 50px;
+                position: relative;
+                overflow: hidden;
+                transform: rotate(90deg);
+                margin-left: -25px;
+                margin-top: -150px;
+            }
+            
+            .arrow:after {
+                content: "";
+                position: absolute;
+                width: 50px;
+                height: 50px;
+                background: #fff;
+                transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                /* IE 9 */
+                -moz-transform: rotate(45deg);
+                /* Firefox */
+                -webkit-transform: rotate(45deg);
+                /* Safari and Chrome */
+                -o-transform: rotate(45deg);
+                /* Opera */
+                top: 25px;
+                left: 25px;
+                box-shadow: -1px -1px 10px 0px rgba(0, 0, 0, 0.5);
+            }
+        </style>
+        <div horizontal layout hidden?="{{loading}}">
+            <div>
+                <paper-shadow>
+                    <template repeat="{{moreInfo in moreInfos}}">
+                        <div class="heading">
+                            <h1>{{moreInfo.Title}}<span class="year">({{moreInfo.Year}})</span></h1>
+                        </div>
+                        <div class="body">
+                            <div class="desc">{{moreInfo.Description}}</div>
+                            <div layout horizontal class="more-info">
+                                <div class="more-info-left">Starring:</div>
+                                <div>Barry Newman, Cleavon Little</div>
+                            </div>
+                            <div layout horizontal class="more-info">
+                                <div class="more-info-left">Director:</div>
+                                <div>Richard C. Sarafian</div>
+                            </div>
+                            <div layout horizontal class="more-info">
+                                <div class="more-info-left">Genre:</div>
+                                <div>Action &amp; Adventure</div>
+                            </div>
+                            <div layout horizontal class="more-info">
+                                <div class="more-info-left">MPAA:</div>
+                                <div>R</div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="footer">
+                            stuff
+                            <br>
+
+                        </div>
+                    </template>
+                </paper-shadow>
+            </div>
+            <div style="//background: yellow;" layout horizontal center>
+                <div class="arrow"></div>
+            </div>
+        </div>
+
+        <core-ajax loading="{{loading}}" id="getMoreInfo" auto="false" method="GET" contentType="application/json" url="get-movie-info.php?movieID={{movieID}}" response="{{moreInfos}}" handleAs="json">
+        </core-ajax>
+    </template>
+
+    <script>
+        Polymer({
+            created: function () {
+
+            },
+            fetchMoreInfo: function () {
+                this.$.getMoreInfo.go();
+            }
+        });
+    </script>
+
+</polymer-element>
