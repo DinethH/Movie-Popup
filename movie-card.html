@@ -3,7 +3,7 @@
 <link rel="import" href="bower_components/font-roboto/roboto.html">
 <link rel="import" href="netflix-popup.html">
 
-<polymer-element name="movie-card" attributes="movieID">
+<polymer-element name="movie-card" attributes="movieID movieTitle">
     <template>
         <style>
             .movie-card {
@@ -24,7 +24,7 @@
             <div>
                 <a href="" target="_blank">
                     <div on-mouseover="{{showInfo}}" on-mouseout="{{hideInfo}}">
-                            tytertgretf
+                            {{movieTitle}}
                     </div>
                 </a>
                 <netflix-popup id="moviePopup" hidden?="{{!hover}}" movieID="{{movieID}}"></netflix-popup>
