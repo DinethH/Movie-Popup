@@ -20,10 +20,10 @@
                 z-index: 1000;
             }
         </style>
-        <div horizontal layout end-justified>
+        <div horizontal layout center-justified on-mouseout="{{hideInfo}}">
             <div>
                 <a href="" target="_blank">
-                    <div on-mouseover="{{showInfo}}" on-mouseout="{{hideInfo}}">
+                    <div on-mouseover="{{showInfo}}">
                             {{movieTitle}}
                     </div>
                 </a>
