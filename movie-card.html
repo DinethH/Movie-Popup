@@ -19,11 +19,15 @@
                 margin-left: -430px;
                 z-index: 1000;
             }
+            .title {
+                font-size: 26px;
+                padding-left: 20px;
+            }
         </style>
-        <div horizontal layout center-justified on-mouseout="{{hideInfo}}">
-            <div>
-                <a href="" target="_blank">
-                    <div on-mouseover="{{showInfo}}">
+        <div horizontal layout center-justified>
+            <div on-mouseleave="{{hideInfo}}" style="">
+                <a href="" target="_blank" >
+                    <div on-mouseover="{{showInfo}}" class="title">
                             {{movieTitle}}
                     </div>
                 </a>
