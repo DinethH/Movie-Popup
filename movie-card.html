@@ -15,23 +15,23 @@
             
             netflix-popup {
                 position: absolute;
-                margin-top: -230px;
+                margin-top: {{topMarginRelative}}px;
                 margin-left: -430px;
                 z-index: 1000;
             }
             .title {
-                font-size: 26px;
+                //font-size: 26px;
                 padding-left: 20px;
             }
         </style>
-        <div horizontal layout center-justified>
+        <div horizontal layout center-justified id="movieTitleID">
             <div on-mouseleave="{{hideInfo}}" style="">
-                <a href="" target="_blank" >
+                <a>
                     <div on-mouseover="{{showInfo}}" class="title">
-                            {{movieTitle}}
+                            {{movieTitle}} {{rect.top}}
                     </div>
                 </a>
-                <netflix-popup id="moviePopup" hidden?="{{!hover}}" movieID="{{movieID}}"></netflix-popup>
+                <netflix-popup id="moviePopup" hidden?="{{!hover}}" movieID="{{movieID}}" arrowPosition="{{topMarginRelative}}"></netflix-popup>
             </div>
             <div></div>
         </div>
@@ -44,7 +44,20 @@
     <script>
         Polymer({
             hover: false,
+            topMargin: -250,
+            ready: function () {
+                this.rect = this.$.movieTitleID;
+                this.rect = this.rect.getBoundingClientRect();
+                if (this.rect.top < 270) {
+                    this.topMarginRelative = this.topMargin + 140 +(100 - this.rect.top);
+                } else {
+                   this.topMarginRelative = this.topMargin; 
+                }
+                
+                //console.log(this.rect.top);
+            },
             showInfo: function () {
+       
                 this.$.moviePopup.fetchMoreInfo();
                 this.hover = true;
             },

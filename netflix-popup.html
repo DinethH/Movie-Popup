@@ -4,14 +4,14 @@
 <link rel="import" href="bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="bower_components/core-image/core-image.html">
 
-<polymer-element name="netflix-popup" center layout attributes="fetchMoreInfo movieID">
+<polymer-element name="netflix-popup" center layout attributes="fetchMoreInfo movieID arrowPosition">
     <template>
         <style>
             .more-info-card {
                 border-radius: 8px;
                 width: 400px;
                 //height: 400px;
-                
+                background: white;
             }
             
             .heading {
@@ -65,7 +65,7 @@
                 overflow: hidden;
                 transform: rotate(90deg);
                 margin-left: -25px;
-                margin-top: -150px;
+                margin-top: {{marginTop2}}px;
                 
             }
             
@@ -101,7 +101,7 @@
                 <paper-shadow id="moreInfo" class="more-info-card">
                     <template repeat="{{moreInfo in moreInfos}}">
                         <div class="heading">
-                            <h1>{{moreInfo.Title}}<span class="year">({{moreInfo.Year}})</span></h1>
+                            <h1>{{moreInfo.Title}}<span class="year">({{moreInfo.Year}})</span> AP: {{arrowPosition}} {{marginTop2}}</h1>
                         </div>
                         <div class="body">
                             <div class="desc">
@@ -156,11 +156,15 @@
 
     <script>
         Polymer({
+            
             created: function () {
                 this.poster = "";
+                this.marginTop2 = -150;
             },
-            ready: function () {
-
+            arrowPositionChanged: function () {
+                if (this.arrowPosition > -250) {
+                    this.marginTop2 = -520 + 2*(Math.abs(this.arrowPosition) - 70);
+                }
             },
             fetchMoreInfo: function () {
                 this.$.getMoreInfo.go();
